@@ -16,7 +16,7 @@ const articles: Article[] = [
     date: 'Feb 2026',
     tag: 'Tech',
     url: 'https://medium.com/@rawte.mayur/ai-isnt-here-to-replace-developers-it-s-here-to-replace-the-stuff-we-secretly-hate-doing-9272a50c1c4a',
-    summary: 'AI automates the tedious parts of development — the boilerplate, the documentation, the repetitive fixes. Programmers are still very much needed.',
+    summary: 'AI automates the tedious parts of development — the boilerplate, the docs, the repetitive fixes. Programmers are still very much needed.',
   },
   {
     title: "Too much positivity is bad for your mental health",
@@ -45,7 +45,7 @@ const Blog: React.FC = () => {
   const [ref, inView] = useInView({ threshold: 0.1, triggerOnce: true });
 
   return (
-    <section id="writing" className="py-24 bg-cream">
+    <section id="writing" className="py-24 bg-stone-50">
       <div className="max-w-4xl mx-auto px-8">
         <motion.div
           ref={ref}
@@ -55,7 +55,7 @@ const Blog: React.FC = () => {
         >
           <h2 className="text-4xl font-serif font-bold text-stone-900 mb-14">Writing</h2>
 
-          <div className="space-y-px">
+          <div>
             {articles.map((article, i) => (
               <motion.div
                 key={article.url}
@@ -67,23 +67,31 @@ const Blog: React.FC = () => {
                   href={article.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex flex-col sm:flex-row sm:items-start gap-4 py-7 border-b border-stone-200 hover:border-stone-400 transition-colors duration-200"
+                  className="group flex gap-6 py-7 border-b border-stone-200 hover:bg-amber-50/60 hover:border-amber-300 transition-all duration-200 -mx-4 px-4 rounded-sm"
                 >
-                  <div className="sm:w-28 flex-shrink-0 flex sm:flex-col gap-3 sm:gap-1">
-                    <span className="text-xs text-stone-400 font-sans uppercase tracking-wider">{article.date}</span>
-                    <span className="text-xs text-amber-700 font-sans bg-amber-50 px-2 py-0.5 rounded self-start">
-                      {article.tag}
-                    </span>
-                  </div>
+                  {/* Index */}
+                  <span className="text-xs text-stone-300 font-sans font-medium mt-1.5 w-6 flex-shrink-0 group-hover:text-amber-600 transition-colors duration-200">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
 
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-lg font-serif font-semibold text-stone-900 group-hover:text-amber-700 transition-colors duration-200 mb-2 leading-snug">
+                    <div className="flex flex-wrap items-center gap-3 mb-2">
+                      <span className="text-xs text-stone-400 font-sans">{article.date}</span>
+                      <span className="text-xs text-amber-700 font-sans bg-amber-50 group-hover:bg-amber-100 px-2 py-0.5 rounded transition-colors duration-200">
+                        {article.tag}
+                      </span>
+                    </div>
+                    <h3 className="text-lg font-serif font-semibold text-stone-900 group-hover:text-amber-800 transition-colors duration-200 mb-2 leading-snug">
                       {article.title}
                     </h3>
                     <p className="text-stone-500 font-sans text-sm leading-relaxed">
                       {article.summary}
                     </p>
                   </div>
+
+                  <span className="text-stone-200 group-hover:text-amber-500 transition-colors duration-200 self-start mt-1.5 text-lg">
+                    ↗
+                  </span>
                 </a>
               </motion.div>
             ))}
