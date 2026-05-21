@@ -1,220 +1,104 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { BookOpen, Clock, ArrowRight, Filter } from 'lucide-react';
+
+interface Article {
+  title: string;
+  date: string;
+  tag: string;
+  url: string;
+  summary: string;
+}
+
+const articles: Article[] = [
+  {
+    title: "AI Isn't Here to Replace Developers. It's Here to Replace the Stuff We Secretly Hate Doing.",
+    date: 'Feb 2026',
+    tag: 'Tech',
+    url: 'https://medium.com/@rawte.mayur/ai-isnt-here-to-replace-developers-it-s-here-to-replace-the-stuff-we-secretly-hate-doing-9272a50c1c4a',
+    summary: 'AI automates the tedious parts of development — the boilerplate, the documentation, the repetitive fixes. Programmers are still very much needed.',
+  },
+  {
+    title: "Too much positivity is bad for your mental health",
+    date: 'Apr 2020',
+    tag: 'Psychology',
+    url: 'https://medium.com/@rawte.mayur/too-much-positivity-is-bad-for-your-mental-health-d8ef850fd247',
+    summary: 'Toxic positivity suppresses genuine emotions. Acknowledging difficulty is not weakness — it is how resilience actually works.',
+  },
+  {
+    title: "Mind, Me, and a Routine",
+    date: 'Apr 2020',
+    tag: 'Psychology',
+    url: 'https://medium.com/@rawte.mayur/mind-me-and-a-routine-ea218c8a8fac',
+    summary: 'A look at how routines connect to wellbeing — and why the "lazy" label so often misses what is really going on.',
+  },
+  {
+    title: "It's not all about happiness.",
+    date: 'Feb 2020',
+    tag: 'Psychology',
+    url: 'https://medium.com/@rawte.mayur/its-not-all-about-happiness-9dc02e684909',
+    summary: 'Social media sells a narrow version of the good life. Broader emotional wellbeing is more honest and more useful.',
+  },
+];
 
 const Blog: React.FC = () => {
-  const [ref, inView] = useInView({
-    threshold: 0.2,
-    triggerOnce: true,
-  });
-
-  const [activeCategory, setActiveCategory] = useState('All');
-
-  const categories = ['All', 'Tech', 'Psychology', 'Photography', 'Leadership'];
-
-  const blogPosts = [
-    {
-      title: "The Art of Empathetic Leadership in Tech",
-      excerpt: "How INFP traits can become superpowers in leading engineering teams and building products that truly matter.",
-      category: "Leadership",
-      readTime: "8 min read",
-      date: "Dec 15, 2024",
-      gradient: "from-accent-purple to-accent-pink",
-    },
-    {
-      title: "Building with Purpose: Beyond the Code",
-      excerpt: "Every line of code is an opportunity to create meaningful impact. Here's how I approach development with intention.",
-      category: "Tech",
-      readTime: "6 min read",
-      date: "Dec 10, 2024",
-      gradient: "from-accent-teal to-accent-blue",
-    },
-    {
-      title: "The Psychology of Creative Problem Solving",
-      excerpt: "Understanding how our minds work when we're in the flow state, and how to cultivate creativity in technical work.",
-      category: "Psychology",
-      readTime: "10 min read",
-      date: "Dec 5, 2024",
-      gradient: "from-accent-pink to-accent-purple",
-    },
-    {
-      title: "Capturing the Unseen: Philosophy Through Photography",
-      excerpt: "How photography has taught me to see beyond the surface and find beauty in the mundane moments of life.",
-      category: "Photography",
-      readTime: "7 min read",
-      date: "Nov 28, 2024",
-      gradient: "from-accent-blue to-accent-teal",
-    },
-    {
-      title: "The Silent Revolution: Introversion in Leadership",
-      excerpt: "Challenging the extrovert bias in tech leadership and exploring how quiet leaders can drive innovation.",
-      category: "Leadership",
-      readTime: "9 min read",
-      date: "Nov 20, 2024",
-      gradient: "from-accent-purple to-accent-pink",
-    },
-    {
-      title: "Mindful Development: Bringing Presence to Programming",
-      excerpt: "How mindfulness practices have transformed my approach to coding and problem-solving in complex systems.",
-      category: "Tech",
-      readTime: "5 min read",
-      date: "Nov 15, 2024",
-      gradient: "from-accent-teal to-accent-blue",
-    },
-  ];
-
-  const filteredPosts = activeCategory === 'All' 
-    ? blogPosts 
-    : blogPosts.filter(post => post.category === activeCategory);
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        duration: 0.6,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-        ease: "easeOut",
-      },
-    },
-  };
+  const [ref, inView] = useInView({ threshold: 0.1, triggerOnce: true });
 
   return (
-    <section id="blog" className="py-24 bg-gradient-to-br from-pastel-lavender/20 via-white to-pastel-blue/20">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="writing" className="py-24 bg-cream">
+      <div className="max-w-4xl mx-auto px-8">
         <motion.div
           ref={ref}
-          variants={containerVariants}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-          className="text-center mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, ease: 'easeOut' }}
         >
-          <motion.h2
-            variants={itemVariants}
-            className="text-5xl md:text-6xl font-serif font-bold text-gray-800 mb-6"
-          >
-            Thoughts & Writings
-          </motion.h2>
-          <motion.p
-            variants={itemVariants}
-            className="text-xl text-gray-600 font-sans max-w-3xl mx-auto leading-relaxed"
-          >
-            Exploring the intersection of technology, psychology, and creativity through words and reflections.
-          </motion.p>
-        </motion.div>
+          <h2 className="text-4xl font-serif font-bold text-stone-900 mb-14">Writing</h2>
 
-        {/* Category Filter */}
-        <motion.div
-          variants={itemVariants}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-          className="flex flex-wrap justify-center gap-4 mb-12"
-        >
-          <div className="flex items-center gap-2 text-gray-600 mb-4">
-            <Filter className="w-5 h-5" />
-            <span className="font-medium">Filter by category:</span>
-          </div>
-          <div className="flex flex-wrap gap-3">
-            {categories.map((category) => (
-              <motion.button
-                key={category}
-                onClick={() => setActiveCategory(category)}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
-                  activeCategory === category
-                    ? 'bg-gradient-to-r from-accent-purple to-accent-pink text-white shadow-lg'
-                    : 'bg-white/70 backdrop-blur-sm text-gray-600 hover:bg-white/90 border border-white/50'
-                }`}
+          <div className="space-y-px">
+            {articles.map((article, i) => (
+              <motion.div
+                key={article.url}
+                initial={{ opacity: 0, y: 12 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: i * 0.09, ease: 'easeOut' }}
               >
-                {category}
-              </motion.button>
+                <a
+                  href={article.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex flex-col sm:flex-row sm:items-start gap-4 py-7 border-b border-stone-200 hover:border-stone-400 transition-colors duration-200"
+                >
+                  <div className="sm:w-28 flex-shrink-0 flex sm:flex-col gap-3 sm:gap-1">
+                    <span className="text-xs text-stone-400 font-sans uppercase tracking-wider">{article.date}</span>
+                    <span className="text-xs text-amber-700 font-sans bg-amber-50 px-2 py-0.5 rounded self-start">
+                      {article.tag}
+                    </span>
+                  </div>
+
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-lg font-serif font-semibold text-stone-900 group-hover:text-amber-700 transition-colors duration-200 mb-2 leading-snug">
+                      {article.title}
+                    </h3>
+                    <p className="text-stone-500 font-sans text-sm leading-relaxed">
+                      {article.summary}
+                    </p>
+                  </div>
+                </a>
+              </motion.div>
             ))}
           </div>
-        </motion.div>
 
-        {/* Blog Posts Grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
-        >
-          {filteredPosts.map((post, index) => (
-            <motion.article
-              key={`${post.title}-${index}`}
-              variants={itemVariants}
-              whileHover={{ y: -10, scale: 1.02 }}
-              className="group cursor-pointer"
+          <div className="mt-10">
+            <a
+              href="https://medium.com/@rawte.mayur"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-stone-400 font-sans text-sm hover:text-stone-700 transition-colors duration-200 underline underline-offset-4"
             >
-              <div className="bg-white/70 backdrop-blur-sm rounded-3xl p-8 shadow-lg border border-white/50 hover:shadow-2xl transition-all duration-500 h-full flex flex-col">
-                {/* Category Badge */}
-                <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-white text-sm font-medium mb-6 self-start bg-gradient-to-r ${post.gradient}`}>
-                  <BookOpen className="w-4 h-4" />
-                  {post.category}
-                </div>
-
-                {/* Content */}
-                <h3 className="text-xl md:text-2xl font-serif font-semibold text-gray-800 mb-4 group-hover:text-gray-900 transition-colors line-clamp-2">
-                  {post.title}
-                </h3>
-                <p className="text-gray-600 leading-relaxed mb-6 flex-grow">
-                  {post.excerpt}
-                </p>
-
-                {/* Meta Info */}
-                <div className="flex items-center justify-between text-sm text-gray-500 mb-6">
-                  <div className="flex items-center gap-2">
-                    <Clock className="w-4 h-4" />
-                    {post.readTime}
-                  </div>
-                  <span>{post.date}</span>
-                </div>
-
-                {/* Read More */}
-                <motion.div
-                  whileHover={{ x: 5 }}
-                  className="flex items-center gap-2 text-accent-purple font-medium group-hover:text-accent-pink transition-colors"
-                >
-                  <span>Read Article</span>
-                  <ArrowRight className="w-4 h-4" />
-                </motion.div>
-              </div>
-            </motion.article>
-          ))}
-        </motion.div>
-
-        {/* View More Button */}
-        <motion.div
-          variants={itemVariants}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-          className="text-center mt-12"
-        >
-          <motion.a
-            href="https://medium.com/@rawte.mayur"
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-accent-purple to-accent-pink text-white rounded-full font-medium text-lg shadow-lg hover:shadow-xl transition-all duration-300 group"
-          >
-            <BookOpen className="w-6 h-6" />
-            <span>Read All Articles on Medium</span>
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </motion.a>
+              All articles on Medium →
+            </a>
+          </div>
         </motion.div>
       </div>
     </section>

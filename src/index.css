@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html {
+    background-color: #FDFAF6;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: #FDFAF6;
+    color: #1C1917;
+  }
+
+  ::selection {
+    background-color: #FEF3C7;
+    color: #1C1917;
+  }
+}
