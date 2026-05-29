@@ -1,128 +1,83 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
+import Section from './Section';
 
 interface Project {
+  n: string;
   name: string;
-  type: string;
-  description: string;
+  year: string;
+  blurb: string;
   url: string;
-  tags: string[];
 }
 
 const projects: Project[] = [
   {
+    n: '01',
     name: 'Shipthis',
-    type: 'Product · 2017–present',
-    description:
-      'AI-powered freight forwarding software. Joined as founding engineer, grew into CTO. Serves freight forwarders globally — air, ocean, land, rail, multimodal.',
+    year: '2017 → now',
+    blurb: 'All-in-one AI freight-forwarding software — quote-to-cash across air, ocean, land and rail. 100+ forwarders, a million-plus shipments.',
     url: 'https://shipthis.co',
-    tags: ['SaaS', 'Logistics', 'AI', 'B2B'],
   },
   {
+    n: '02',
     name: 'Teamsly',
-    type: 'Open Source · 6★',
-    description:
-      'An open-source modern client for Microsoft Teams built with Next.js 15 and Microsoft Graph API. Available via Homebrew.',
+    year: '2025',
+    blurb: 'A keyboard-first, AI-aware Microsoft Teams client on the Graph API — voice rooms, disappearing DMs, an MCP server. Installable via Homebrew.',
     url: 'https://github.com/mayurrawte/teamsly',
-    tags: ['Next.js', 'TypeScript', 'Microsoft Graph'],
   },
   {
+    n: '03',
     name: 'searoute-ts',
-    type: 'Library · 3★',
-    description:
-      'Shortest sea route between any two points on Earth. Handles Suez, Panama, Bab-el-Mandeb restrictions, vessel-draft gating, K-shortest alternatives, and ETA from speed.',
+    year: '2024',
+    blurb: 'A TypeScript maritime-routing library — shortest sea route between two points, with canal gates, vessel-draft limits and ETA from speed.',
     url: 'https://github.com/mayurrawte/searoute-ts',
-    tags: ['TypeScript', 'Geospatial', 'npm'],
   },
   {
-    name: 'github-angular-actions',
-    type: 'GitHub Action · 5★',
-    description:
-      'Pre-installs Angular CLI and dependencies in your GitHub Actions workflow. Configure ng versions per project.',
-    url: 'https://github.com/mayurrawte/github-angular-actions',
-    tags: ['GitHub Actions', 'Angular', 'CI/CD'],
+    n: '04',
+    name: 'SherlockQA',
+    year: '2024',
+    blurb: 'A GitHub Action that runs an AI pull-request review on every commit — catching the boring class of mistakes before a human does.',
+    url: 'https://github.com/mayurrawte/SherlockQA',
+  },
+  {
+    n: '05',
+    name: 'GoTrust',
+    year: '2023',
+    blurb: 'A small, opinionated authentication framework in Go — JWT and OAuth flows, batteries included.',
+    url: 'https://github.com/mayurrawte/GoTrust',
   },
 ];
 
 const Projects: React.FC = () => {
-  const [ref, inView] = useInView({ threshold: 0.1, triggerOnce: true });
-
   return (
-    <section id="work" className="py-24 bg-cream">
-      <div className="max-w-4xl mx-auto px-8">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, ease: 'easeOut' }}
-        >
-          <h2 className="text-4xl font-serif font-bold text-stone-900 mb-14">Work</h2>
-
-          <div>
-            {projects.map((project, i) => (
-              <motion.div
-                key={project.name}
-                initial={{ opacity: 0, y: 16 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: i * 0.09, ease: 'easeOut' }}
-              >
-                <a
-                  href={project.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex gap-6 py-7 border-b border-stone-200 hover:bg-amber-50/60 hover:border-amber-300 transition-all duration-200 -mx-4 px-4 rounded-sm"
-                >
-                  {/* Index */}
-                  <span className="text-xs text-stone-300 font-sans font-medium mt-1.5 w-6 flex-shrink-0 group-hover:text-amber-600 transition-colors duration-200">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-
-                  <div className="flex-1 min-w-0">
-                    <div className="flex flex-wrap items-baseline gap-3 mb-2">
-                      <h3 className="text-xl font-serif font-semibold text-stone-900 group-hover:text-amber-800 transition-colors duration-200">
-                        {project.name}
-                      </h3>
-                      <span className="text-xs text-stone-400 font-sans">
-                        {project.type}
-                      </span>
-                    </div>
-                    <p className="text-stone-500 font-sans text-sm leading-relaxed mb-3">
-                      {project.description}
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                      {project.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="text-xs text-stone-400 font-sans bg-stone-100 group-hover:bg-amber-100/80 group-hover:text-amber-800 px-2 py-0.5 rounded transition-colors duration-200"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  <span className="text-stone-200 group-hover:text-amber-500 transition-colors duration-200 self-start mt-1.5 text-lg">
-                    ↗
-                  </span>
-                </a>
-              </motion.div>
-            ))}
-          </div>
-
-          <div className="mt-10">
+    <Section id="work" n="02" kicker="Selected work" title="Things, shipped.">
+      <ul>
+        {projects.map((p) => (
+          <li key={p.name}>
             <a
-              href="https://github.com/mayurrawte"
+              href={p.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-stone-400 font-sans text-sm hover:text-stone-700 transition-colors duration-200 underline underline-offset-4"
+              className="group grid grid-cols-12 gap-x-4 gap-y-2 items-baseline py-6 border-t border-line"
             >
-              All repos on GitHub →
+              <span className="folio col-span-2 md:col-span-1 text-xl">{p.n}</span>
+              <span className="display row-link col-span-10 md:col-span-4 text-ink text-2xl md:text-[2rem] leading-none">
+                {p.name}
+              </span>
+              <span className="kicker col-span-6 md:col-span-2 text-faint">{p.year}</span>
+              <p className="col-span-12 md:col-span-5 text-muted leading-snug">{p.blurb}</p>
             </a>
-          </div>
-        </motion.div>
-      </div>
-    </section>
+          </li>
+        ))}
+      </ul>
+
+      <p className="mt-10 text-muted max-w-[40rem]">
+        Earlier: <span className="text-ink/85">ELIOT</span>, a smart prepaid electricity meter
+        (Best IoT Solution, Ministry of Power &amp; Coal), and{' '}
+        <span className="text-ink/85">InviBeats</span>, heart-rate from a phone camera, selected
+        by Samsung R&amp;D. All 60 repositories on{' '}
+        <a href="https://github.com/mayurrawte" target="_blank" rel="noopener noreferrer" className="link">GitHub</a>.
+      </p>
+    </Section>
   );
 };
 

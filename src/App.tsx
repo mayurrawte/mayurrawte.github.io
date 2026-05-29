@@ -1,5 +1,5 @@
 import React from 'react';
-import Navigation from './components/Navigation';
+import Nav from './components/Nav';
 import Hero from './components/Hero';
 import About from './components/About';
 import Projects from './components/Projects';
@@ -10,12 +10,10 @@ import Footer from './components/Footer';
 
 function App() {
   return (
-    <div className="min-h-screen bg-cream">
-      <Navigation />
+    <div id="top" className="min-h-screen bg-paper text-ink">
+      <Nav />
       <main>
-        <section id="home">
-          <Hero />
-        </section>
+        <Hero />
         <About />
         <Projects />
         <CreativeWork />

@@ -4,11 +4,20 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        'serif': ['Crimson Text', 'serif'],
-        'sans': ['DM Sans', 'sans-serif'],
+        display: ['"Bodoni Moda"', 'ui-serif', 'Georgia', 'serif'],
+        sans: ['"Hanken Grotesk"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
       colors: {
-        cream: '#FDFAF6',
+        paper: '#F4F2EC',
+        ink: '#1A1916',
+        muted: '#6F6B61',
+        faint: '#A8A296',
+        accent: '#27408B',
+        line: 'rgba(26, 25, 22, 0.14)',
+        rule: 'rgba(26, 25, 22, 0.85)',
+      },
+      maxWidth: {
+        page: '1180px',
       },
     },
   },

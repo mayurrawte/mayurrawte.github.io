@@ -3,18 +3,81 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    color-scheme: light;
+  }
+
   html {
-    background-color: #FDFAF6;
+    background-color: #F4F2EC;
     scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 
   body {
-    background-color: #FDFAF6;
-    color: #1C1917;
+    background-color: #F4F2EC;
+    color: #1A1916;
+    font-family: 'Hanken Grotesk', ui-sans-serif, system-ui, sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
   }
 
   ::selection {
-    background-color: #FEF3C7;
-    color: #1C1917;
+    background-color: #1A1916;
+    color: #F4F2EC;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+}
+
+@layer components {
+  /* High-contrast display serif — headlines, name, pull-quotes */
+  .display {
+    font-family: 'Bodoni Moda', ui-serif, Georgia, serif;
+    font-weight: 600;
+    line-height: 0.98;
+    letter-spacing: -0.005em;
+  }
+
+  /* Small grotesk meta — kickers, indices, captions */
+  .kicker {
+    font-family: 'Hanken Grotesk', ui-sans-serif, system-ui, sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: #6F6B61;
+  }
+
+  /* Inline text link */
+  .link {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: rgba(26, 25, 22, 0.28);
+    text-underline-offset: 3px;
+    transition: color 160ms ease, text-decoration-color 160ms ease;
+  }
+  .link:hover {
+    color: #27408B;
+    text-decoration-color: #27408B;
+  }
+
+  /* Row link — accent on hover, no underline */
+  .row-link {
+    transition: color 160ms ease;
+  }
+  .row-link:hover {
+    color: #27408B;
+  }
+
+  /* Big editorial section number */
+  .folio {
+    font-family: 'Bodoni Moda', ui-serif, Georgia, serif;
+    font-weight: 500;
+    color: #A8A296;
   }
 }

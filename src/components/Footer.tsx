@@ -2,19 +2,13 @@ import React from 'react';
 
 const Footer: React.FC = () => {
   const year = new Date().getFullYear();
-
   return (
-    <footer className="py-10 bg-stone-900">
-      <div className="max-w-4xl mx-auto px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <p className="text-stone-500 font-sans text-sm">
-          © {year} Mayur Rawte
+    <footer className="border-t-2 border-rule">
+      <div className="max-w-page mx-auto px-6 md:px-10 py-8 flex flex-col sm:flex-row items-baseline justify-between gap-3">
+        <p className="display text-ink text-lg">Mayur Rawte</p>
+        <p className="kicker normal-case tracking-normal text-faint">
+          © {year} · Bengaluru, India · Engineer · Photographer · Writer
         </p>
-        <a
-          href="mailto:rawte.mayur@gmail.com"
-          className="text-stone-500 font-sans text-sm hover:text-stone-300 transition-colors duration-200"
-        >
-          rawte.mayur@gmail.com
-        </a>
       </div>
     </footer>
   );
